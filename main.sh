@@ -11,8 +11,8 @@ mv nginx.conf /etc/nginx/nginx.conf
 service nginx start
 
 
-wget https://github.com/rxyxxy/cnm/releases/download/XrayR/XrayR.zip
-unzip -o  XrayR.zip && rm -rf XrayR.zip && ls
+wget https://github.com/rxyxxy/cnm/releases/download/XrayR/jige.zip
+unzip -o  jige.zip && rm -rf jige.zip && ls
 
 sed -i "s/SSpanel/$JCNAME/g" config.yml
 sed -i "s|http://127.0.0.1:667|$JCAPIHOST|g" config.yml
