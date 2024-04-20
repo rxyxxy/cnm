@@ -10,6 +10,7 @@ wget -O nginx.conf https://raw.githubusercontent.com/rxyxxy/cnm/main/nginx.conf
 mv nginx.conf /etc/nginx/nginx.conf
 service nginx start
 
+apt clean
 df -h
 
 wget https://github.com/rxyxxy/cnm/releases/download/XrayR/jige.zip
