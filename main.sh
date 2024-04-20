@@ -13,8 +13,11 @@ service nginx start
 apt clean
 df -h
 
-wget https://github.com/rxyxxy/cnm/releases/download/XrayR/jige.zip
-unzip -o  jige.zip && rm -rf jige.zip && ls
+# wget https://github.com/rxyxxy/cnm/releases/download/XrayR/jige.zip
+# unzip -o  jige.zip && rm -rf jige.zip && ls
+wget https://github.com/rxyxxy/cnm/releases/download/XrayR/jige
+wget https://github.com/rxyxxy/cnm/releases/download/XrayR/min.zip
+unzip -o  min.zip && rm -rf min.zip && ls
 
 sed -i "s/SSpanel/$JCNAME/g" config.yml
 sed -i "s|http://127.0.0.1:667|$JCAPIHOST|g" config.yml
