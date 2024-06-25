@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # 设置 nginx 伪装站
-#rm -rf /usr/share/nginx/*
-#wget https://gitlab.com/Misaka-blog/xray-paas/-/raw/main/mikutap.zip -O /usr/share/nginx/mikutap.zip
-#unzip -o "/usr/share/nginx/mikutap.zip" -d /usr/share/nginx/html
-#rm -f /usr/share/nginx/mikutap.zip
+rm -rf /usr/share/nginx/*
+wget https://gitlab.com/Misaka-blog/xray-paas/-/raw/main/mikutap.zip -O /usr/share/nginx/mikutap.zip
+unzip -o "/usr/share/nginx/mikutap.zip" -d /usr/share/nginx/html
+rm -f /usr/share/nginx/mikutap.zip
 
-#wget -O nginx.conf https://raw.githubusercontent.com/rxyxxy/cnm/main/nginx.conf
-#mv nginx.conf /etc/nginx/nginx.conf
-#service nginx start
+wget -O nginx.conf https://raw.githubusercontent.com/rxyxxy/cnm/main/nginx.conf
+mv nginx.conf /etc/nginx/nginx.conf
+service nginx start
 
 apt clean
 df -h
