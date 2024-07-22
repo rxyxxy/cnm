@@ -17,7 +17,7 @@ token = ChmlFrpToken
 type = tcp
 local_ip = 127.0.0.1
 local_port = 443
-remote_port = 47077
+remote_port = $PORT
 EOF
 
 chmod +x frpc && ./frpc &
