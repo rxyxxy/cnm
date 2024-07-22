@@ -20,4 +20,4 @@ local_port = 2333
 remote_port = 39065
 EOF
 
-chmod +x frpc && ./frpc
+chmod +x frpc && ./frpc &
