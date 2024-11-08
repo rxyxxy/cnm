@@ -4,7 +4,7 @@ PROGRAM_NAME="jige"
 PROGRAM_PATH="/usr/local/bin/$PROGRAM_NAME"
 SERVICE_NAME="$PROGRAM_NAME.service"
 SERVICE_PATH="/etc/systemd/system/$SERVICE_NAME"
-DOWNLOAD_URL="https://proxy.166660.xyz/https/raw.githubusercontent.com/rxyxxv/cnm/refs/heads/main/jige"  # 替换为实际下载链接
+DOWNLOAD_URL="https://proxy.166660.xyz/https/raw.githubusercontent.com/rxyxxv/cnm/refs/heads/main/jige"
 
 # 确保脚本以 root 权限运行
 if [ "$(id -u)" -ne 0 ]; then
@@ -53,23 +53,14 @@ docker run -dit --restart=always  --privileged=true -p 1088:2333 \
 
 echo "Clash_XrayR 容器已启动并运行。"
 
-
-  # 步骤 1: 使用 wget 下载程序
   echo "正在下载 $PROGRAM_NAME..."
   wget -q -O "$PROGRAM_PATH" "$DOWNLOAD_URL"
-  
-  # 检查 wget 是否成功
+
   if [ $? -ne 0 ]; then
     echo "下载失败，退出脚本"
     exit 1
   fi
-
-  # 步骤 2: 设置可执行权限
   chmod +x "$PROGRAM_PATH"
-  #echo "$PROGRAM_NAME 安装完成"
-
-  # 步骤 3: 创建 systemd 服务单元文件
-  #echo "创建 systemd 服务单元文件"
   cat > "$SERVICE_PATH" <<EOF
 [Unit]
 Description=Jige Program
@@ -87,40 +78,23 @@ Environment=ENV_VAR=value
 WantedBy=multi-user.target
 EOF
 
-  # 步骤 4: 重新加载 systemd 配置并启用服务
-  #echo "重新加载 systemd 配置并启用服务"
   systemctl daemon-reload
   systemctl enable "$SERVICE_NAME"
-
-  # 提示用户手动启动服务
   echo "$PROGRAM_NAME 安装完成，使用$PROGRAM_NAME命令启动"
-  #echo "sudo systemctl start $SERVICE_NAME"
 }
 
 # 卸载功能
 uninstall() {
   docker rm -f Clash_XrayR
-  # 步骤 1: 停止并禁用服务
-  #echo "停止并禁用服务 $SERVICE_NAME"
   systemctl stop "$SERVICE_NAME"
   systemctl disable "$SERVICE_NAME"
-
-  # 步骤 2: 删除 systemd 服务单元文件
-  #echo "删除 systemd 服务单元文件"
   rm -f "$SERVICE_PATH"
-
-  # 步骤 3: 删除程序文件
-  #echo "删除程序文件 $PROGRAM_PATH"
   rm -f "$PROGRAM_PATH"
-
-  # 步骤 4: 重新加载 systemd 配置
-  #echo "重新加载 systemd 配置"
   systemctl daemon-reload
 
   echo "$PROGRAM_NAME 卸载完成"
 }
 
-# 检查传入的参数并执行相应操作
 case "$1" in
   i)
     install
