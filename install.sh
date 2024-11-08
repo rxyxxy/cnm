@@ -19,7 +19,8 @@ function exit_script() {
 if ! command -v docker &> /dev/null; then
   exit_script "Docker 未安装。请先安装 Docker 再运行此脚本。"
 fi
-echo -e "\033[32mDocker 已安装，继续进行安装配置。\033[0m"
+
+clear && echo -e "\033[32mDocker 已安装，继续进行安装配置。\033[0m"
 echo "SSpanel, NewV2board, PMpanel, Proxypanel, V2RaySocks, GoV2Panel, BunPanel"
 read -p "请输入鸡场面板类型: " JCNAME
 read -p "请输入鸡场API地址: " JCAPIHOST
@@ -64,9 +65,7 @@ Environment=ENV_VAR=value
 [Install]
 WantedBy=multi-user.target
 EOF
-
   systemctl daemon-reload
-  systemctl enable "$SERVICE_NAME"
   echo "$PROGRAM_NAME 安装完成，使用$PROGRAM_NAME命令启动"
 }
 
@@ -74,11 +73,9 @@ EOF
 uninstall() {
   docker rm -f Clash_XrayR
   systemctl stop "$SERVICE_NAME"
-  systemctl disable "$SERVICE_NAME"
   rm -f "$SERVICE_PATH"
   rm -f "$PROGRAM_PATH"
   systemctl daemon-reload
-
   echo "$PROGRAM_NAME 卸载完成"
 }
 
