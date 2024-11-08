@@ -28,7 +28,7 @@ read -p "请输入鸡场API KEY: " JCAPIKEY
 read -p "请输入节点ID: " JCNODEID
 echo -e "\033[33m请输入有效的订阅，否则无法启动服务。列如：http://127.0.0.1:667/api/v1/client/subscribe?token=123\033[0m"
 read -p "请输入订阅地址: " sub
-read -p "是否需要换docker源，国内服务器建议换源：y/n" doc
+read -p "是否需要换docker源，国内服务器建议换源 y/n (n)：" doc
 
 if [ doc == 'y' && doc == 'Y' ]; then
   sudo mkdir -p /etc/docker
