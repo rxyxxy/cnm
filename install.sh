@@ -28,6 +28,26 @@ read -p "请输入鸡场API KEY: " JCAPIKEY
 read -p "请输入节点ID: " JCNODEID
 echo -e "\033[33m请输入有效的订阅，否则无法启动服务。列如：http://127.0.0.1:667/api/v1/client/subscribe?token=123\033[0m"
 read -p "请输入订阅地址: " sub
+read -p "是否需要换docker源，国内服务器建议换源：y/n" doc
+
+if [ doc == 'y' && doc == 'Y' ]; then
+  sudo mkdir -p /etc/docker
+  sudo tee /etc/docker/daemon.json <<EOF
+{
+    "registry-mirrors": [
+        "https://hub.uuuadc.top",
+        "https://docker.anyhub.us.kg",
+        "https://dockerhub.jobcher.com",
+        "https://dockerhub.icu",
+        "https://docker.ckyl.me",
+        "https://docker.awsl9527.cn"
+    ]
+}
+EOF
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  
+fi
 
 if [[ -z "$JCNAME" || -z "$JCAPIHOST" || -z "$JCAPIKEY" || -z "$JCNODEID" || -z "$sub" ]]; then
   exit_script "所有变量都必须提供。请重新运行脚本并提供所有变量。"
