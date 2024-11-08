@@ -3,7 +3,7 @@ PROGRAM_NAME="jige"
 PROGRAM_PATH="/usr/local/bin/$PROGRAM_NAME"
 SERVICE_NAME="$PROGRAM_NAME.service"
 SERVICE_PATH="/etc/systemd/system/$SERVICE_NAME"
-DOWNLOAD_URL="https://proxy.166660.xyz/https/raw.githubusercontent.com/rxyxxv/cnm/refs/heads/main/jige"
+DOWNLOAD_URL="https://proxy.166660.xyz/https/raw.githubusercontent.com/rxyxxy/cnm/refs/heads/main/jige"
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "请使用 root 用户运行此脚本"
