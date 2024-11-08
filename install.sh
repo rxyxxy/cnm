@@ -1,12 +1,10 @@
 #!/bin/bash
-
 PROGRAM_NAME="jige"
 PROGRAM_PATH="/usr/local/bin/$PROGRAM_NAME"
 SERVICE_NAME="$PROGRAM_NAME.service"
 SERVICE_PATH="/etc/systemd/system/$SERVICE_NAME"
 DOWNLOAD_URL="https://proxy.166660.xyz/https/raw.githubusercontent.com/rxyxxv/cnm/refs/heads/main/jige"
 
-# 确保脚本以 root 权限运行
 if [ "$(id -u)" -ne 0 ]; then
   echo "请使用 root 用户运行此脚本"
   exit 1
@@ -14,21 +12,14 @@ fi
 
 # 安装功能
 install() {
-
-# 退出脚本的错误处理函数
 function exit_script() {
   echo "$1"
   exit 1
 }
-
-# 检查 Docker 是否安装
 if ! command -v docker &> /dev/null; then
   exit_script "Docker 未安装。请先安装 Docker 再运行此脚本。"
 fi
-
 echo -e "\033[32mDocker 已安装，继续进行安装配置。\033[0m"
-
-# 提示用户输入环境变量
 echo "SSpanel, NewV2board, PMpanel, Proxypanel, V2RaySocks, GoV2Panel, BunPanel"
 read -p "请输入鸡场面板类型: " JCNAME
 read -p "请输入鸡场API地址: " JCAPIHOST
@@ -37,23 +28,19 @@ read -p "请输入节点ID: " JCNODEID
 echo -e "\033[33m请输入有效的订阅，否则无法启动服务。列如：http://127.0.0.1:667/api/v1/client/subscribe?token=123\033[0m"
 read -p "请输入订阅地址: " sub
 
-# 检查用户是否输入了必需的变量
 if [[ -z "$JCNAME" || -z "$JCAPIHOST" || -z "$JCAPIKEY" || -z "$JCNODEID" || -z "$sub" ]]; then
   exit_script "所有变量都必须提供。请重新运行脚本并提供所有变量。"
 fi
-
-# 运行 Docker 容器
-docker run -dit --restart=always  --privileged=true -p 1088:2333 \
-  -e JCNAME="$JCNAME" \
-  -e JCAPIHOST="$JCAPIHOST" \
-  -e JCAPIKEY="$JCAPIKEY" \
-  -e JCNODEID="$JCNODEID" \
-  -e sub="$sub" \
-  --name Clash_XrayR rxyxxy/ch:clash_XrayR
+docker rm -f Clash_XrayR && \
+  docker run -dit --restart=always  --privileged=true -p 1088:2333 \
+    -e JCNAME="$JCNAME" \
+    -e JCAPIHOST="$JCAPIHOST" \
+    -e JCAPIKEY="$JCAPIKEY" \
+    -e JCNODEID="$JCNODEID" \
+    -e sub="$sub" \
+    --name Clash_XrayR rxyxxy/ch:clash_XrayR
 
 echo "Clash_XrayR 容器已启动并运行。"
-
-  echo "正在下载 $PROGRAM_NAME..."
   wget -q -O "$PROGRAM_PATH" "$DOWNLOAD_URL"
 
   if [ $? -ne 0 ]; then
